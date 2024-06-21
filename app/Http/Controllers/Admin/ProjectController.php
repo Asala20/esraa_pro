@@ -45,12 +45,12 @@ class ProjectController extends Controller
         $project->summary = $request->summary;
         $project->professor = $request->professor;
         if($request->hasFile('image')){
-             $image = $request->file('image');
-             $imageName =time() . '.' . $image->getClientOriginalExtension();
-             $image->move(public_path('image'), $imageName);
-             $project->image = 'image/'.$imageName;
-         
-         }
+            $image = $request->file('image');
+            $imageName =time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('image'), $imageName);
+            $project->image = 'image/'.$imageName;
+        
+        }
         //  if($request->hasFile('book')){
         //      $book = $request->file('book');
         //      $bookName = time() . '.' . $book->getClientOriginalExtension();
@@ -58,8 +58,8 @@ class ProjectController extends Controller
         //      $project->book = $bookName;
         //  }
         $project->save();
-          return response()->json([
-          "message" => "project added"
+            return response()->json([
+            "message" => "project added"
         ], 201);
     
 }
@@ -70,15 +70,15 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         if(!empty($project))
-     {
-     return response()->json($project);
-     }
-         else
-     {
+        {
+        return response()->json($project);
+        }
+            else
+        {
         return response()->json([
         "message" => "Not Found project"
-         ] , 404);
-      }
+            ] , 404);
+        }
     }
 
     /**
