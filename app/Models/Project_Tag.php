@@ -4,18 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Tag;
 use App\Models\Project;
 
-class Book extends Model
+class Project_Tag extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'book-file',
-        'num-page',
-        'num-download',
+        
+        
+        'project_id',
+        'tag_id',
+         
     ];
-    public function project()
-    {
-    return $this->belongsTo(Project::class);
-    }
 }

@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('image');
-            $table->string('tags');
             $table->text('details');
             $table->text('summary');
             $table->string('professor');

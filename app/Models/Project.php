@@ -4,6 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Student;
+use App\Models\Specialization;
+use App\Models\Tag;
+use App\Models\project_year;
+
 
 class Project extends Model
 {
@@ -12,7 +17,6 @@ class Project extends Model
        
         'name',
         'image',
-        'tags',
         'details',
         'professor',
         'summary',  
@@ -32,4 +36,10 @@ class Project extends Model
     {
     return $this->hasOne(Book::class);
     }
+
+    public function tag()
+    {
+    return $this->belongsToMany(tag::class);
+    }
 }
+
