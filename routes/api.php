@@ -3,9 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\ProjectYearController;
+use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\Admin\ProjectYearController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +31,7 @@ Route::post('/students', [StudentController::class, 'store']);
 Route::put('/students/{id}', [StudentController::class, 'update']);
 Route::delete('/students/{id}', [StudentController::class, 'destroy']);
 
-Route::get('/projects', [ProjectController::class, 'index']);
+Route::get('/projects', 'App\Http\Controllers\MarketsouhaibController@index');
 Route::get('/projects/{id}', [ProjectController::class, 'show']);
 Route::post('/projects', [ProjectController::class, 'store']);
 Route::put('/projects/{id}', [ProjectController::class, 'update']);
