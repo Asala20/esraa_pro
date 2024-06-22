@@ -21,3 +21,4 @@ class Admin extends Model
         'remember_token',
     ];
 }
+//asala
