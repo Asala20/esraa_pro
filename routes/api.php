@@ -2,9 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\BookController;
+use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\ProjectYearController;
 
@@ -61,3 +62,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Route::get('/years/{year}', [ProjectYearController::class, 'show']);
     });
 
+
+
+    Route::get('tags', [TagController::class, 'index']);
+    Route::post('tags', [TagController::class, 'store']);
+    Route::get('tags/{id}', [TagController::class, 'show']);
+    Route::put('tags/{id}', [TagController::class, 'update']);
+    Route::delete('tags/{id}', [TagController::class, 'destroy']);
+    
