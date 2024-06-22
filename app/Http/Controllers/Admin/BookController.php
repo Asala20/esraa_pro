@@ -20,7 +20,8 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        
+   
     }
 
     /**
@@ -28,7 +29,26 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'book_file' => 'required|mimes:pdf,docx',
+            'num_page' => 'required',
+            'num_download' => 'required',
+        ]);
+
+        $book = new Book;
+        $book->num_page = $request->num_page;
+        $book->num_download = $request->num_download;
+          if($request->hasFile('book')){
+             $book = $request->file('book');
+             $bookName = time() . '.' . $book->getClientOriginalExtension();
+             $book->move(public_path('book'), $bookName);
+             $project->book = $bookName;
+         }
+
+         $book->save();
+            return response()->json([
+            "message" => "book added"
+        ], 201);
     }
 
     /**

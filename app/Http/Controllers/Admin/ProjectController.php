@@ -29,9 +29,9 @@ class ProjectController extends Controller
         $validated = $request->validate([
             'name' => 'required|string',
             // 'project_date' => 'date',
-            // 'year_id' => 'required',
+            'year_id' => 'required',
             'image' => 'required|image|mimes:jpeg,jpg,png,gif',
-            // 'book' => 'mimes:pdf,docx',
+            'book_id' => 'required|string',
             'details' => 'required|string',
             'summary' => 'required |string',
             'professor' => 'required|string',
@@ -40,7 +40,8 @@ class ProjectController extends Controller
         $project = new Project;
         $project->name = $request->name;
         // $project->project_date = $request->project_date;
-        // $project->year_id = $request->year_id;
+        $project->year_id = $request->year_id;
+        $project->book_id = $request->book_id;
         $project->details = $request->details;
         $project->summary = $request->summary;
         $project->professor = $request->professor;
@@ -98,9 +99,9 @@ class ProjectController extends Controller
         { 
             $project = Project::find($id);
             $project->name = $request->name;
-            // $project->project_date = $request->project_date;
+            $project->book_id = $request->book_id;
+            $project->year_id = $request->year_id;
             $project->details = $request->details;
-            // $project->year_id = $request->year_id;
             $project->summary = $request->summary;
             $project->professor = $request->professor;
             if($request->hasFile('image')){

@@ -14,10 +14,7 @@ class Student extends Model
     protected $fillable = [
         'name',
         'year',
-        'project_id',
-        'spec_id',
-    
-        
+        'spec_id',  
     ];
     public function specialization()
     {
