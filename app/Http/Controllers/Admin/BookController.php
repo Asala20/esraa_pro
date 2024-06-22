@@ -30,7 +30,7 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'book_file' => 'required|mimes:pdf,docx',
+            'book_file' => 'required',
             'num_page' => 'required',
             'num_download' => 'required',
         ]);
@@ -38,14 +38,13 @@ class BookController extends Controller
         $book = new Book;
         $book->num_page = $request->num_page;
         $book->num_download = $request->num_download;
-          if($request->hasFile('book')){
-             $book = $request->file('book');
-             $bookName = time() . '.' . $book->getClientOriginalExtension();
-             $book->move(public_path('book'), $bookName);
-             $project->book = $bookName;
-         }
-
-         $book->save();
+        if ($request->hasFile('book_file')) {
+            $book_file = $request->file('book_file');
+            $book_fileNam = time() . '.' . $book_file->getClientOriginalExtension();
+            $book_file->move(public_path('BookFiles'), $book_fileNam);
+            $book->book_file = $book_fileNam;
+        }
+        $book->save();
             return response()->json([
             "message" => "book added"
         ], 201);

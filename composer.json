@@ -10,8 +10,9 @@
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "setasign/fpdf": "^1.8",
         "setasign/fpdi": "*",
-        "smalot/pdfparser": "*",
+        "smalot/pdfparser": "^2.10",
         "tecnickcom/tcpdf": "*"
     },
     "require-dev": {

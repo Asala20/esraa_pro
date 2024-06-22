@@ -19,6 +19,8 @@ class Project extends Model
         'image',
         'details',
         'professor',
+        'year_id',
+        'book_id',
         'summary',  
     ];
 
