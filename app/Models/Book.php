@@ -10,9 +10,9 @@ class Book extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'book-file',
-        'num-page',
-        'num-download',
+        'book_file',
+        'num_page',
+        'num_download',
     ];
     public function project()
     {
