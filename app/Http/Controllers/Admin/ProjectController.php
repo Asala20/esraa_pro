@@ -93,37 +93,37 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update( $id,  Request $request)
-    {
-        if(Project::where('id' , $id)->exists())
-        { 
-            $project = Project::find($id);
-            $project->name = $request->name;
-            $project->book_id = $request->book_id;
-            $project->year_id = $request->year_id;
-            $project->details = $request->details;
-            $project->summary = $request->summary;
-            $project->professor = $request->professor;
-            if($request->hasFile('image')){
-                $image = $request->file('image');
-                $imageName =time() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('image'), $imageName);
-                $project->image = 'image/'.$imageName;
-        
-        }
-        // if($request->hasFile('book')){
-        //     $book = $request->file('book');
-        //     $bookName = time() . '.' . $book->getClientOriginalExtension();
-        //     $book->move(public_path('book'), $bookName);
-        //     $project->book = $bookName;
-        // }
-        $project->update();
-        return response()->json([
-        "message" => "updated successfully",
-        $project
-        ], 201);
+    public function update($id, Request $request)
+{
+    $validated = $request->validate([
+        'name' => 'required|string',
+        'year_id' => 'required',
+        'image' => 'nullable|image|mimes:jpeg,jpg,png,gif',
+        'book_id' => 'required|string',
+        'details' => 'required|string',
+        'summary' => 'required|string',
+        'professor' => 'required|string',
+    ]);
+
+    $project = Project::findOrFail($id);
+
+    $data = $request->only(['name', 'book_id', 'year_id', 'details', 'summary', 'professor']);
+
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('image'), $imageName);
+        $data['image'] = 'image/' . $imageName;
     }
-    }
+
+    $project->update($data);
+
+    return response()->json([
+        'message' => 'Updated successfully',
+        'project' => $project,
+    ], 200);
+}
+
     /**
      * Remove the specified resource from storage.
      */
