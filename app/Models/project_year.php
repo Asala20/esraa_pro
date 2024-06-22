@@ -13,8 +13,8 @@ class project_year extends Model
         'project_year',
     ];
     
-    public function project()
+    public function projects()
     {
-    return $this->belongTO(Project::class);
+    return $this->hasMany(Project::class , 'year_id');
     }
 }

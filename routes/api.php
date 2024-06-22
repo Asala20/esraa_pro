@@ -38,9 +38,12 @@ Route::get('/projects/{id}', [ProjectController::class, 'show']);
 Route::post('/projects', [ProjectController::class, 'store']);
 Route::put('/projects/{id}', [ProjectController::class, 'update']);
 Route::delete('/projects/{id}', [ProjectController::class, 'destroy']);
-Route::get('/years/{year}', [ProjectYearController::class, 'show']);
+//show  project by year
+Route::get('/years/{id}', [ProjectYearController::class, 'show']);
 // Book route
+
 Route::post('/books', [BookController::class, 'store']);
+Route::get('/books/{id}', [BookController::class, 'show']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);

@@ -34,9 +34,23 @@ class ProjectYearController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(project_year $project_year)
+    public function show($id)
     {
-        //
+        // Find the ProjectYear model by ID
+        $projectYear = project_year::find($id);
+
+        // Ensure the model exists
+        if (!$projectYear) {
+            return response()->json(['message' => 'Project Year not found'], 404);
+        }
+
+        // Use the relationship to get the projects
+        $thisYearProjects = $projectYear->projects;
+
+        return response()->json([
+            'message' => 'ok',
+            'projects' => $thisYearProjects
+        ]);
     }
 
     /**
