@@ -12,7 +12,7 @@ class ProjectYearController extends Controller
      */
     public function index()
     {
-        //
+        // 
     }
 
     /**
