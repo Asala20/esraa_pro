@@ -48,25 +48,17 @@ Route::get('/books/{id}', [BookController::class, 'show']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-    // Route::get('/students', [StudentController::class, 'index']);
-    // Route::get('/students/{id}', [StudentController::class, 'show']);
-    // Route::post('/students', [StudentController::class, 'store']);
-    // Route::put('/students/{id}', [StudentController::class, 'update']);
-    // Route::delete('/students/{id}', [StudentController::class, 'destroy']);
-
-    // Route::get('/projects', [ProjectController::class, 'index']);
-    // Route::get('/projects/{id}', [ProjectController::class, 'show']);
-    // Route::post('/projects', [ProjectController::class, 'store']);
-    // Route::put('/projects/{id}', [ProjectController::class, 'update']);
-    // Route::delete('/projects/{id}', [ProjectController::class, 'destroy']);
-    // Route::get('/years/{year}', [ProjectYearController::class, 'show']);
     });
 
+Route::get('/students', [StudentController::class, 'index']);
+Route::get('/students/{id}', [StudentController::class, 'show']);
+Route::post('/students', [StudentController::class, 'store']);
+Route::put('/students/{id}', [StudentController::class, 'update']);
+Route::delete('/students/{id}', [StudentController::class, 'destroy']);
 
-
-    Route::get('tags', [TagController::class, 'index']);
-    Route::post('tags', [TagController::class, 'store']);
-    Route::get('tags/{id}', [TagController::class, 'show']);
-    Route::put('tags/{id}', [TagController::class, 'update']);
-    Route::delete('tags/{id}', [TagController::class, 'destroy']);
+Route::get('/tags', [TagController::class, 'index']);
+Route::post('/tags', [TagController::class, 'store']);
+Route::get('/tags/{id}', [TagController::class, 'show']);
+Route::put('/tags/{id}', [TagController::class, 'update']);
+Route::delete('/tags/{id}', [TagController::class, 'destroy']);
     
