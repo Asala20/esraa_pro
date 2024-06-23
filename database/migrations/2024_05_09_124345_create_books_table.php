@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('book_file');
-            $table->integer('num_page'); 
-            $table->integer('num_download'); 
+            $table->integer('num_page')->default(0); // Default value added
+            $table->integer('num_download')->default(0);
             $table->timestamps();
         });
     }

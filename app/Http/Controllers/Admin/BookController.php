@@ -4,6 +4,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Exception;
+use Illuminate\Support\Facades\Log;
+// word libraries
+// use Phpdocx\Create\CreateDocx;
+// use Phpdocx\Elements\WordFragment;
+
 
 class BookController extends Controller
 {
@@ -20,8 +27,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        
-   
+
     }
 
     /**
@@ -29,43 +35,33 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'book_file' => 'required',
-            'num_page' => 'required',
-            'num_download' => 'required',
+        $request->validate([
+            'book_file' => 'required|mimes:pdf|max:10000', // Adjust the max size as needed
         ]);
 
-        $book = new Book;
-        $book->num_page = $request->num_page;
-        $book->num_download = $request->num_download;
         if ($request->hasFile('book_file')) {
-            $book_file = $request->file('book_file');
-            $book_fileNam = time() . '.' . $book_file->getClientOriginalExtension();
-            $book_file->move(public_path('BookFiles'), $book_fileNam);
-            $book->book_file = $book_fileNam;
-        }
-        $book->save();
-            return response()->json([
-            "message" => "book added"
-        ], 201);
-    }
+            try {
+                $file = $request->file('book_file');
+                $path = $file->store('books');
 
-    /**
-     * Display the specified resource.
-     */
-    public function show( $id)
-    {
-        $book = Book::find($id);
-        if(!empty($book))
-        {
-        return response()->json($book);
+                // Count the number of pages
+                $numPages = Book::countPages(Storage::path($path));
+
+                // Save book details to the database
+                $book = Book::create([
+                    'book_file' => $path,
+                    'num_page' => $numPages, // Ensure num_page is set
+                    'num_download' => 0,
+                ]);
+
+                return response()->json($book, 201);
+            } catch (Exception $e) {
+                // Handle error during PDF parsing or database operations
+                return response()->json(['error' => 'Failed to process the PDF file'], 500);
+            }
         }
-            else
-        {
-        return response()->json([
-        "message" => "Not Found book"
-            ] , 404);
-        }
+
+        return response()->json(['error' => 'File upload failed'], 400);
     }
 
     /**
