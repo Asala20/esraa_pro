@@ -25,7 +25,7 @@ class ProjectController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {   
+    {
         $validated = $request->validate([
             'name' => 'required|string',
             // 'project_date' => 'date',
@@ -50,7 +50,7 @@ class ProjectController extends Controller
             $imageName =time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('image'), $imageName);
             $project->image = 'image/'.$imageName;
-        
+
         }
         //  if($request->hasFile('book')){
         //      $book = $request->file('book');
@@ -62,7 +62,7 @@ class ProjectController extends Controller
             return response()->json([
             "message" => "project added"
         ], 201);
-    
+
 }
     /**
      * Display the specified resource.
@@ -144,4 +144,30 @@ class ProjectController extends Controller
             ] , 404);
         }
     }
+
+//     public function search(Request $request)
+//     {
+//         $query = Project::query();
+
+//         if ($request->has('search')) {
+//             $searchTerm = $request->input('search');
+
+//             $query->where(function ($q) use ($searchTerm) {
+//                 $q->where('name', 'like', "%$searchTerm%")
+//                   ->orWhereHas('students', function ($q) use ($searchTerm) {
+//                       $q->where('name', 'like', "%$searchTerm%");
+//                   })
+//                   ->orWhereHas('professor', function ($q) use ($searchTerm) {
+//                       $q->where('name', 'like', "%$searchTerm%");
+//                   })
+//                   ->orWhereHas('tags', function ($q) use ($searchTerm) {
+//                       $q->where('name', 'like', "%$searchTerm%");
+//                   });
+//             });
+//         }
+
+//         $projects = $query->with('students', 'professor', 'tags')->get();
+
+//         return response()->json($projects);
+//     }
 }

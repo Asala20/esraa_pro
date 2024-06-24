@@ -46,6 +46,10 @@ Route::get('/years/{id}', [ProjectYearController::class, 'show']);
 Route::post('/books', [BookController::class, 'store']);
 Route::get('/books/{id}', [BookController::class, 'show']);
 
+//search route
+Route::get('/projects/search', 'ProjectController@search');
+
+
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     });
@@ -61,4 +65,3 @@ Route::post('/tags', [TagController::class, 'store']);
 Route::get('/tags/{id}', [TagController::class, 'show']);
 Route::put('/tags/{id}', [TagController::class, 'update']);
 Route::delete('/tags/{id}', [TagController::class, 'destroy']);
-    
