@@ -36,7 +36,7 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'book_file' => 'required|mimes:pdf|max:10000', // Adjust the max size as needed
+            'book_file' => 'required|mimes:pdf|max:102400', // Adjust the max size as needed
         ]);
 
         if ($request->hasFile('book_file')) {

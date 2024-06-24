@@ -1,6 +1,8 @@
-php_value upload_max_filesize 256M
-php value post_max_size 256M
+# php_value upload_max_filesize 256M
+# php value post_max_size 256M
 <IfModule mod_rewrite.c>
+php_value upload_max_filesize 100M
+php value post_max_size 100M
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
     </IfModule>
