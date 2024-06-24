@@ -145,29 +145,5 @@ class ProjectController extends Controller
         }
     }
 
-//     public function search(Request $request)
-//     {
-//         $query = Project::query();
-
-//         if ($request->has('search')) {
-//             $searchTerm = $request->input('search');
-
-//             $query->where(function ($q) use ($searchTerm) {
-//                 $q->where('name', 'like', "%$searchTerm%")
-//                   ->orWhereHas('students', function ($q) use ($searchTerm) {
-//                       $q->where('name', 'like', "%$searchTerm%");
-//                   })
-//                   ->orWhereHas('professor', function ($q) use ($searchTerm) {
-//                       $q->where('name', 'like', "%$searchTerm%");
-//                   })
-//                   ->orWhereHas('tags', function ($q) use ($searchTerm) {
-//                       $q->where('name', 'like', "%$searchTerm%");
-//                   });
-//             });
-//         }
-
-//         $projects = $query->with('students', 'professor', 'tags')->get();
-
-//         return response()->json($projects);
-//     }
+//
 }

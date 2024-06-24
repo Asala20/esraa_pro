@@ -9,15 +9,12 @@ use App\Models\Project;
 class Tag extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+    ];
 
-protected $fillable = [
-        
-    'name',
-     
-];
-
-public function project()
-{
-return $this->belongsToMany(Project::class);
-}
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'project__tags');
+    }
 }

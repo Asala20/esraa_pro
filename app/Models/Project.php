@@ -14,34 +14,32 @@ class Project extends Model
 {
     use HasFactory;
     protected $fillable = [
-       
         'name',
         'image',
         'details',
         'professor',
         'year_id',
         'book_id',
-        'summary',  
+        'summary',
     ];
 
-    public function student()
+    public function students()
     {
-         return $this->belongsToMany(Student::class);
+        return $this->belongsToMany(Student::class, 'student__projects');
     }
 
     public function project_year()
     {
-    return $this->belongsTo(project_year::class, 'year_id');
+        return $this->belongsTo(ProjectYear::class, 'year_id');
     }
-    
+
     public function book()
     {
-    return $this->hasOne(Book::class);
+        return $this->hasOne(Book::class, 'id', 'book_id');
     }
 
-    public function tag()
+    public function tags()
     {
-    return $this->belongsToMany(tag::class);
+        return $this->belongsToMany(Tag::class, 'project__tags');
     }
 }
-

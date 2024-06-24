@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\ProjectYearController;
+use App\Http\Controllers\SearchController;
 
 
 /*
@@ -47,21 +48,16 @@ Route::post('/books', [BookController::class, 'store']);
 Route::get('/books/{id}', [BookController::class, 'show']);
 
 //search route
-Route::get('/projects/search', 'ProjectController@search');
+Route::get('/search', [SearchController::class , 'search']);
 
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     });
-
-Route::get('/students', [StudentController::class, 'index']);
-Route::get('/students/{id}', [StudentController::class, 'show']);
-Route::post('/students', [StudentController::class, 'store']);
-Route::put('/students/{id}', [StudentController::class, 'update']);
-Route::delete('/students/{id}', [StudentController::class, 'destroy']);
-
 Route::get('/tags', [TagController::class, 'index']);
 Route::post('/tags', [TagController::class, 'store']);
 Route::get('/tags/{id}', [TagController::class, 'show']);
 Route::put('/tags/{id}', [TagController::class, 'update']);
 Route::delete('/tags/{id}', [TagController::class, 'destroy']);
+
+Route::post('/Project_Tag', [TagController::class, 'projecttagstore']);

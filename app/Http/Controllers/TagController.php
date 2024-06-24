@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tag;
+use App\Models\Project_Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -64,5 +65,12 @@ class TagController extends Controller
 
         $tag->delete();
         return response()->json(null, 204);
+    }
+    public function projecttagstore(Request $request){
+
+    $project_tag= new Project_Tag;
+    $project_tag->project_id=$request->project_id;
+    $project_tag->tag_id=$request->tag_id;
+    $project_tag->save();
     }
 }

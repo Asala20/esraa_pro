@@ -9,20 +9,20 @@ use App\Models\Specialization;
 
 class Student extends Model
 {
-
     use HasFactory;
     protected $fillable = [
         'name',
         'year',
-        'spec_id',  
+        'spec_id',
     ];
+
     public function specialization()
     {
-    return $this->belongsTo(Specialization::class);
+        return $this->belongsTo(Specialization::class);
     }
-    
-    public function project()
+
+    public function projects()
     {
-    return $this->belongsToMany(Project::class);
+        return $this->belongsToMany(Project::class, 'student__projects');
     }
 }
