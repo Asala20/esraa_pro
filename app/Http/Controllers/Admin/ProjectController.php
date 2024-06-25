@@ -144,6 +144,29 @@ class ProjectController extends Controller
             ] , 404);
         }
     }
+    public function restore($id)
+   {
+    $project = Project::withTrashed()->find($id);
+
+    if ($project) {
+        $project->restore();
+        return response()->json(['message' => 'Project restored successfully.']);
+    }
+
+        return response()->json(['message' => 'Project not found.'], 404);
+    }
+
+    public function forceDelete($id)
+    {
+        $project = Project::withTrashed()->find($id);
+
+        if ($project) {
+            $project->forceDelete();
+            return response()->json(['message' => 'Project permanently deleted.']);
+        }
+
+        return response()->json(['message' => 'Project not found.'], 404);
+    }
 
 //
 }

@@ -22,6 +22,7 @@ class Project extends Model
         'book_id',
         'summary',
     ];
+    protected $dates = ['deleted_at'];
 
     public function students()
     {
