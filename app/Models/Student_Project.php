@@ -15,6 +15,6 @@ class Student_Project extends Model
         
         'student_id',
         'project_id',
-         
+        
     ];
 }

@@ -30,7 +30,7 @@ class Project extends Model
 
     public function project_year()
     {
-        return $this->belongsTo(ProjectYear::class, 'year_id');
+        return $this->belongsTo(project_year::class, 'year_id');
     }
 
     public function book()
