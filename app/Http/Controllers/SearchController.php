@@ -27,7 +27,7 @@ class SearchController extends Controller
                     });
             });
         }
-
+        // table names
         $projects = $query->with('students', 'tags')->get();
 
         return response()->json($projects);
