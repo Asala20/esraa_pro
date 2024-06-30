@@ -38,7 +38,7 @@ Route::delete('/students/{id}', [StudentController::class, 'destroy']);
 Route::get('/projects', [ProjectController::class, 'index']);
 Route::get('/projects/{id}', [ProjectController::class, 'show']);
 Route::post('/projects', [ProjectController::class, 'store']);
-Route::put('/projects/{id}', [ProjectController::class, 'update']);
+Route::post('/projects/{id}', [ProjectController::class, 'update']);
 Route::delete('/projects/{id}', [ProjectController::class, 'destroy']);
 //show  project by year
 Route::get('/years/{id}', [ProjectYearController::class, 'show']);
@@ -50,6 +50,9 @@ Route::get('/books/{id}', [BookController::class, 'show']);
 //search route
 Route::get('/search', [SearchController::class , 'search']);
 
+// fetch and display the students working on a specific project.
+Route::get('/students/{projectId}/students', [StudentController::class, 'getStudents']);
+
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -59,5 +62,7 @@ Route::post('/tags', [TagController::class, 'store']);
 Route::get('/tags/{id}', [TagController::class, 'show']);
 Route::put('/tags/{id}', [TagController::class, 'update']);
 Route::delete('/tags/{id}', [TagController::class, 'destroy']);
-
+//merge  tag & project
 Route::post('/Project_Tag', [TagController::class, 'projecttagstore']);
+// merge student & project
+Route::post('/Student_Project', [StudentController::class, 'studentprojectstore']);

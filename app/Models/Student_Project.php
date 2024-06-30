@@ -12,9 +12,9 @@ class Student_Project extends Model
 {
     use HasFactory;
     protected $fillable = [
-        
+
         'student_id',
         'project_id',
-        
+
     ];
 }

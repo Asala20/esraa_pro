@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Log;
 use App\Models\Student;
+use App\Models\Project;
+use App\Models\Student_Project;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -58,5 +60,26 @@ class StudentController extends Controller
             'message'=>"deleted Successfully",
             'status' => 200
         ]);
+    }
+
+    public function studentprojectstore(Request $request){
+
+        $student_project= new Student_Project;
+        $student_project->project_id=$request->project_id;
+        $student_project->student_id=$request->student_id;
+        $student_project->save();
+        }
+
+
+    public function getStudents($projectId)
+    {
+        // Fetch the project with the given ID
+        $project = Project::findOrFail($projectId);
+
+        // Load the students associated with this project
+        $students = $project->students;
+
+        // Return the students as a JSON response
+        return response()->json($students);
     }
 }

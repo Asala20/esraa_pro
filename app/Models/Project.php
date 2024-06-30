@@ -26,7 +26,7 @@ class Project extends Model
 
     public function students()
     {
-        return $this->belongsToMany(Student::class, 'student__projects');
+        return $this->belongsToMany(Student::class, 'student_projects');
     }
 
     public function project_year()
